@@ -69,77 +69,11 @@ public class Main {
                 }
             } else {
                 // 로그인된 상태
-                System.out.println("1. 도서 목록\n2. 도서 대여 / 반납 / 다운로드\n3. 개인 페이지\n4. 관리자 영역\n5. 로그아웃\n6. 종료하기");
+                System.out.println("0. 관리자 영역 \n1. 도서 목록\n2. 도서 대여 / 반납 / 다운로드\n3. 개인 페이지\n4. 로그아웃\n5. 종료하기");
                 int choice = sc.nextInt();
 
                 switch (choice) {
-                    case 1:
-                        System.out.println("전체 도서 목록을 출력합니다. \n");
-                        bookManager.displayBooks();
-                        break;
-
-                    case 2:
-                        System.out.println("1. 도서 대여\n2. 도서 반납\n3. EBook 다운로드\n");
-                        int choice2 = sc.nextInt();
-                        switch (choice2) {
-                            case 1:
-                                System.out.println("대여하실 책의 아이디를 입력하세요: ");
-                                int bookID = sc.nextInt();
-                                bookManager.borrow(bookID, loggedInUser.userID); // 대여 처리
-                                break;
-                            case 2:
-                                System.out.println("반납하실 책의 아이디를 입력하세요: ");
-                                int returnBookID = sc.nextInt();
-                                bookManager.returnBook(returnBookID, loggedInUser.userID); // 반납 처리 (추가 필요)
-                                break;
-                            case 3:
-                                System.out.println("EBook을 다운로드 하시려면 책 ID를 입력해주세요: ");
-                                int downBookID = sc.nextInt();
-
-                                Book book = bookManager.getBookByID(downBookID); // 책 ID로 책 찾기
-
-                                if (book == null) {
-                                    System.out.println("존재하지 않는 책입니다.");
-                                } else if (downBookID >= 500) { // 500번 이상이 EBook
-                                    System.out.println("EBook을 다운로드합니다.");
-                                    System.out.println("이 책의 다운로드 링크: " + ((EBook) book).getDownloadLink());
-                                } else {
-                                    System.out.println("ebook만 다운로드가 가능합니다.");
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-
-                        break;
-
-                    case 3:
-                        System.out.println("1. 대출 도서 확인\n2. 개인 정보 변경");
-                        int choice3 = sc.nextInt();
-                        switch (choice3) {
-                            case 1:
-                                System.out.println("대출하신 도서 목록입니다.");
-                                loggedInUser.checkList(); // 대출 도서 목록 출력
-                                break;
-
-                            case 2:
-                                System.out.println("변경하실 이름을 입력하세요 : ");
-                                String newName = sc.next();
-                                loggedInUser.updateName(newName);
-                                System.out.println("변경하실 이메일을 입력하세요: ");
-                                String newEmail = sc.next();
-                                loggedInUser.updateEmail(newEmail);
-                                System.out.println("정보가 변경되었습니다. ");
-                                break;
-
-                            default:
-                                System.out.println("잘못된 입력입니다. 다시 선택해주세요.");
-                                break;
-                        }
-                        break;
-
-
-                    case 4:
+                    case 0:
                         // 관리자 영역
                         System.out.println("관리자 ID를 입력하세요:");
                         int userID = sc.nextInt();
@@ -217,14 +151,79 @@ public class Main {
                         }
                         break;
 
-                    case 5:
+                    case 1:
+                        System.out.println("전체 도서 목록을 출력합니다. \n");
+                        bookManager.displayBooks();
+                        break;
+
+                    case 2:
+                        System.out.println("1. 도서 대여\n2. 도서 반납\n3. EBook 다운로드\n");
+                        int choice2 = sc.nextInt();
+                        switch (choice2) {
+                            case 1:
+                                System.out.println("대여하실 책의 아이디를 입력하세요: ");
+                                int bookID = sc.nextInt();
+                                bookManager.borrow(bookID, loggedInUser.userID); // 대여 처리
+                                break;
+                            case 2:
+                                System.out.println("반납하실 책의 아이디를 입력하세요: ");
+                                int returnBookID = sc.nextInt();
+                                bookManager.returnBook(returnBookID, loggedInUser.userID); // 반납 처리 (추가 필요)
+                                break;
+                            case 3:
+                                System.out.println("EBook을 다운로드 하시려면 책 ID를 입력해주세요: ");
+                                int downBookID = sc.nextInt();
+
+                                Book book = bookManager.getBookByID(downBookID); // 책 ID로 책 찾기
+
+                                if (book == null) {
+                                    System.out.println("존재하지 않는 책입니다.");
+                                } else if (downBookID >= 500) { // 500번 이상이 EBook
+                                    System.out.println("EBook을 다운로드합니다.");
+                                    System.out.println("이 책의 다운로드 링크: " + ((EBook) book).getDownloadLink());
+                                } else {
+                                    System.out.println("ebook만 다운로드가 가능합니다.");
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+
+                        break;
+
+                    case 3:
+                        System.out.println("1. 대출 도서 확인\n2. 개인 정보 변경");
+                        int choice3 = sc.nextInt();
+                        switch (choice3) {
+                            case 1:
+                                System.out.println("대출하신 도서 목록입니다.");
+                                loggedInUser.checkList(); // 대출 도서 목록 출력
+                                break;
+
+                            case 2:
+                                System.out.println("변경하실 이름을 입력하세요 : ");
+                                String newName = sc.next();
+                                loggedInUser.updateName(newName);
+                                System.out.println("변경하실 이메일을 입력하세요: ");
+                                String newEmail = sc.next();
+                                loggedInUser.updateEmail(newEmail);
+                                System.out.println("정보가 변경되었습니다. ");
+                                break;
+
+                            default:
+                                System.out.println("잘못된 입력입니다. 다시 선택해주세요.");
+                                break;
+                        }
+                        break;
+
+                    case 4:
                         // 로그아웃
                         loggedIn = false;
                         loggedInUser = null;
                         System.out.println("로그아웃 되었습니다.");
                         break;
 
-                    case 6:
+                    case 5:
                         System.out.println("프로그램을 종료합니다. 안녕히 가세요");
                         System.exit(0);
                         break;
