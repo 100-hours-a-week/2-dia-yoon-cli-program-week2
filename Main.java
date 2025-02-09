@@ -8,6 +8,10 @@ public class Main {
         BookManager bookManager = new BookManager(users);
         UserManager userManager = new UserManager(users, bookManager.getBooks());
 
+        // 시간/날씨 스레드 시작
+        TimeWeatherThread timeWeatherThread = new TimeWeatherThread();
+        timeWeatherThread.start();
+
         int userIdCounter = 1;
         boolean loggedIn = false;  // 로그인 상태 추적 변수
         User loggedInUser = null;  // 로그인한 사용자 객체
@@ -17,7 +21,7 @@ public class Main {
         while (true) {
             if (!loggedIn) {
                 // 로그인 안 된 상태
-                System.out.println("1. 회원가입\n2. 로그인\n3. 종료하기");
+                System.out.println("1. 회원가입\n2. 로그인\n3. 종료하기\n숫자를 입력하세요 : ");
                 int choice = sc.nextInt();
 
                 if (choice == 3) {
@@ -228,6 +232,7 @@ public class Main {
 
                     case 5:
                         System.out.println("프로그램을 종료합니다. 안녕히 가세요");
+                        timeWeatherThread.stopThread(); // 스레드 중지
                         System.exit(0);
                         break;
 
