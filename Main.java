@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,10 +29,10 @@ public class Main {
                     case 1:
                         System.out.println("회원가입을 진행합니다.");
                         System.out.println("이름을 입력하세요");
-                        String name = sc.next();
+                        String cname = sc.next();
                         System.out.println("이메일을 입력하세요");
-                        String mail = sc.next();
-                        User user = new User(userIdCounter++, name, mail);
+                        String cmail = sc.next();
+                        User user = new User(userIdCounter++, cname, cmail);
                         users.add(user);
                         System.out.println("회원가입이 완료되었습니다.\n 회원정보를 출력합니다. \n");
                         System.out.println("ID: " + user.getUserID());
@@ -45,13 +44,13 @@ public class Main {
                     case 2:
                         System.out.println("로그인을 진행합니다.");
                         System.out.println("이름을 입력하세요");
-                        name = sc.next();
+                        cname = sc.next();
                         System.out.println("이메일을 입력하세요");
-                        mail = sc.next();
+                        cmail = sc.next();
 
                         boolean isUserFound = false;
                         for (User u : users) {
-                            if (u.getName().equals(name) && u.getEmail().equals(mail)) {
+                            if (u.getName().equals(cname) && u.getEmail().equals(cmail)) {
                                 loggedIn = true;
                                 loggedInUser = u;  // 로그인한 사용자 설정
                                 System.out.println("로그인 성공!");
