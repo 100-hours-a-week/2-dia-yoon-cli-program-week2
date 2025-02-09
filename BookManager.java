@@ -3,7 +3,7 @@ import java.util.List;
 
 public class BookManager {
     public ArrayList<Book> books = new ArrayList<>();
-    private List<User> users;
+    public List<User> users;
 
     public BookManager(List<User> users) {
         this.users = users;
