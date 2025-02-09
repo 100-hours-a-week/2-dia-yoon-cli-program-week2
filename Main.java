@@ -156,7 +156,7 @@ public class Main {
 
                     case 1:
                         System.out.println("전체 도서 목록을 출력합니다. \n");
-                        bookManager.displayBooks();
+                        bookManager.displayBooksAsyncWithWait();
                         break;
 
                     case 2:
