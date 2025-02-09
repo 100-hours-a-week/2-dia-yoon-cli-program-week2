@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<User> users = new ArrayList<>();
         BookManager bookManager = new BookManager(users);
+        UserManager userManager = new UserManager(users, bookManager.getBooks());
 
         int userIdCounter = 1;
         boolean loggedIn = false;  // 로그인 상태 추적 변수
@@ -106,7 +108,8 @@ public class Main {
 
                                         if (typeChoice == 1) {
                                             // Paper 책 추가
-                                            Paper paperBook = new Paper(paperBookCounter++,title, author, genre, publishYear, page);
+                                            Paper paperBook = new Paper(title, author, genre, publishYear, page);
+                                            paperBook.setBookID(paperBookCounter++);
                                             bookManager.addBook(paperBook);
                                             System.out.println("Paper 책이 추가되었습니다.");
                                         } else if (typeChoice == 2) {
@@ -118,7 +121,8 @@ public class Main {
                                             System.out.println("다운로드 링크 입력: ");
                                             String downloadLink = sc.nextLine();
 
-                                            EBook eBook = new EBook(eBookCounter++, title, author, genre, publishYear, page, fileSize, downloadLink);
+                                            EBook eBook = new EBook(title, author, genre, publishYear, page, fileSize, downloadLink);
+                                            eBook.setBookID(eBookCounter++);
                                             bookManager.addBook(eBook);
                                             System.out.println("EBook 책이 추가되었습니다.");
                                         } else {
@@ -163,18 +167,18 @@ public class Main {
                             case 1:
                                 System.out.println("대여하실 책의 아이디를 입력하세요: ");
                                 int bookID = sc.nextInt();
-                                bookManager.borrow(bookID, loggedInUser.userID); // 대여 처리
+                                userManager.borrow(bookID, loggedInUser.userID); // 대여 처리
                                 break;
                             case 2:
                                 System.out.println("반납하실 책의 아이디를 입력하세요: ");
                                 int returnBookID = sc.nextInt();
-                                bookManager.returnBook(returnBookID, loggedInUser.userID); // 반납 처리 (추가 필요)
+                                userManager.returnBook(returnBookID, loggedInUser.userID); // 반납 처리 (추가 필요)
                                 break;
                             case 3:
                                 System.out.println("EBook을 다운로드 하시려면 책 ID를 입력해주세요: ");
                                 int downBookID = sc.nextInt();
 
-                                Book book = bookManager.getBookByID(downBookID); // 책 ID로 책 찾기
+                                Book book = userManager.getBookByID(downBookID); // 책 ID로 책 찾기
 
                                 if (book == null) {
                                     System.out.println("존재하지 않는 책입니다.");

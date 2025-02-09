@@ -3,7 +3,7 @@ import java.util.List;
 
 public class UserManager {
     public ArrayList<Book> books = new ArrayList<>();
-    private List<User> users;
+    public List<User> users;
 
     public UserManager(List<User> users, ArrayList<Book> books) {  // 생성자 수정
         this.users = users;
