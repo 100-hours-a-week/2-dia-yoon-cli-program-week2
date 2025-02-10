@@ -28,7 +28,7 @@ public class TimeWeatherThread extends Thread {
                 System.out.println("현재 날씨: " + currentWeather);
                 System.out.println("----------------------------------------");
 
-                // 30초마다 업데이트
+                // 15초마다 업데이트
                 Thread.sleep(15000);
             } catch (InterruptedException e) {
                 System.out.println("시간/날씨 스레드가 중단되었습니다.");
